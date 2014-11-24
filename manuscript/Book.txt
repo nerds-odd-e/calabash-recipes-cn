@@ -1,0 +1,3 @@
+install-calabash.md
+calabash-console.md
+featue-smells.md
