@@ -84,23 +84,56 @@ RVM 支持安装在大多数的类 UNIX 环境中，最基本的依赖是 *bash*
 
 查看当前 RVM 环境中已经安装了哪些 Ruby，就使用命令
 
-    rvm list
+``` console
+$ rvm list
+ 
+rvm rubies
+ 
+   jruby-1.7.15 [ x86_64 ]
+   jruby-1.7.16 [ x86_64 ]
+   ruby-1.8.7-p374 [ i686 ]
+   ruby-1.9.3-p545 [ x86_64 ]
+   ruby-2.1.1 [ x86_64 ]
+=* ruby-2.1.2 [ x86_64 ]
+   ruby-2.1.3 [ x86_64 ]
+   ruby-2.1.5 [ x86_64 ]
+ 
+# => - current
+# =* - current && default
+#  * - default
+```
+
+用了`=*`开头标记的行就是当前正在使用的 Ruby 实现及版本。
 
 查看当前 RVM 的状态
 
-    rvm current
+``` console
+$ rvm current
+ruby-2.1.5@calabash-android
+```
 
 切换不同的 Ruby 环境，比如切换到最新版的 Ruby
 
-    rvm use ruby
+``` console
+$ rvm use ruby
+Using /Users/chaifeng/.rvm/gems/ruby-2.1.5
+```
+
+从执行结果中可以看到切换到 Ruby 2.1.5。
 
 切换到 Ruby 1.8.7
 
-    rvm use ruby-1.8.7
+``` console
+$ rvm use ruby-1.8.7
+Using /Users/chaifeng/.rvm/gems/ruby-1.8.7
+```
     
 或者仅仅使用版本号
     
-    rvm use 1.8.7
+``` console
+$ rvm use 1.8.7
+Using /Users/chaifeng/.rvm/gems/ruby-1.8.7
+```
 
 #### 使用 RVM 来隔离不同的 Ruby 环境
 RVM 可以帮我们隔离不同的 Ruby 环境，不止是不同的 Ruby 版本，也包括同样版本的 Ruby 在不同的使用场合下可以有不同的 gems。比如，我们在使用 Calabash 测试 Android 项目时，就有 `calabash-android` 这个 gem，而没有 `calabash-cucumber`。在测试 iOS 项目时，就有 `calabash-cucumber` 而没有 `calabash-android`。

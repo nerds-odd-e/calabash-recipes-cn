@@ -12,6 +12,7 @@ Calabash 的控制台是一个命令行的交互环境，在控制台中能够�
     
 ## Calabash 控制台指令（Android & iOS）
 本节会介绍两个版本的 Calabash 共有的指令，在后面的内容中会有特定于 Android/iOS 平台的指令。
+
 ### start_test_server_in_background
 这个指令会自动打开并运行我们的应用，如果是 iOS 项目，并且也使用的是模拟器，这个指令同时也会运行 iOS 模拟器。对于 Android 项目，需要每次手工打开模拟器。
 
