@@ -11,3 +11,12 @@
 0. 测试分层
 0. 实例化需求
 0. ATDD - 验收测试驱动开发
+
+# TODO
+这里列出一些想法
+
+## 为 Linux & Mac OS X 写一个快速安装脚本
+安装 brew（Mac Only）、RVM、Ruby & Calabash
+
+## 做一个快速可用的虚拟机镜像，直接可以学习 Calabash
+暂时考虑使用 WordPress 的客户端。
