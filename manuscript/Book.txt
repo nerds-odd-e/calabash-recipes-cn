@@ -1,4 +1,5 @@
 install-calabash.md
 calabash-ios.md
+calabash-android.md
 calabash-console.md
 featue-smells.md

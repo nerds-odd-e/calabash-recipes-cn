@@ -3,7 +3,7 @@
 0. 介绍 Calabash
 0. [安装 Calabash](manuscript/install-calabash.md)
 0. [在 iOS 项目中使用 Calabash](manuscript/calabash-ios.md)
-0. 在 Android 项目中使用 Calabash
+0. [在 Android 项目中使用 Calabash](manuscript/calabash-android.md)
 0. [Calabash 控制台](manuscript/calabash-console.md)
 0. [Feature 臭味](manuscript/featue-smells.md)
 0. 重构测试代码

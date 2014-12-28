@@ -56,7 +56,7 @@ Feature: Running a test
 ### 搭建本地的 WordPress 服务
 我们将为全球流行的开源博客软件 WordPress 的手机客户端编写自动化验收测试，首先要搭建一个本地的 WordPress 服务器。
 
-我们已经提供了一个可用的 Vagrant 配置文件，位于 [Odd-e 在 Github 的仓库]($ git clone https://github.com/nerds-odd-e/vagrant-wordpress.git)，直接把仓库克隆到本地
+我们已经提供了一个可用的 Vagrant 配置文件，位于 [Odd-e 在 Github 的仓库](https://github.com/nerds-odd-e/vagrant-wordpress)，直接把仓库克隆到本地
 
 ``` console
 $ git clone https://github.com/nerds-odd-e/vagrant-wordpress.git
@@ -329,3 +329,240 @@ try executing
 cucumber
 ---------------------------
 ```
+
+第九步、编译并运行 WordPress for iOS。
+
+最简单的编译和运行的方式就是在 Xcode 中打开 WordPress for iOS 的项目，选择 Scheme 为之前刚刚创建的 **WordPress-cal**，然后选择 iPhone 6 模拟器，最后点击『运行』按钮或者按下『⌘R』快捷键。等编译过程结束后，模拟器就会自动打开，并且运行 WordPress for iOS 应用。按下快捷键『⇧⌘C』激活控制台，查看控制台中是否有类似 **Started LPHTTP server on port 37265** 的内容输出，如果看到就表明 Calabash 已经安装并运行成功。比如
+
+``` text
+2014-12-18 12:16:05.544 WordPress[26997:1397963] Creating the server: <LPHTTPServer: 0x7fd86d123180>
+2014-12-18 12:16:05.545 WordPress[26997:1397963] Calabash iOS server version: CALABASH VERSION: 0.11.4
+2014-12-18 12:16:05.546 WordPress[26997:1397963] simroot: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
+2014-12-18 12:16:05.548 WordPress[26997:1397963] Started LPHTTP server on port 37265
+```
+
+第十步，需要对模拟器做一些小调整。
+
+为了统一起见，建议把 iOS 模拟器的语言环境设置为**美国英语**。
+
+另外，需要打开软键盘，否则 Calabash 会无法操作键盘。方法为，打开 WordPress for iOS 客户端后，点击任意的文本框。如果没有看到软键盘出现，就按下 『⌘K』来启用软键盘。再次按下 『⌘K』会关闭软键盘，这里需要启用软键盘。
+
+### 开始使用 Calabash Console
+
+如果之前没有出现任何问题，那现在已经可以在 iOS 模拟器里面运行 WordPress for iOS 客户端了。为了能让 Calabash Console 与应用建立链接，打开 Calabash Console 后运行内置命令 **start_test_server_in_background** 
+
+``` console
+$ calabash-ios console
+Running irb...
+irb(main):001:0> start_test_server_in_background
+Calabash::Cucumber::Launcher: Launch Method instruments
+Log file: /var/folders/ct/b63y8qts7dz4dmblzzpz28v80000gn/T/run_loop20141224-33581-dif0nk/run_loop.out
+```
+
+然后就会看到模拟器自动运行了 WordPress for iOS 应用，并且停留在登录界面。
+
+在前面已经介绍了如何快速的运行一个 WordPress 本地服务，如果已经运行，打开 **Safari** 或者 **Google Chrome** 可以正常访问 [http://wordpress.local](http://wordpress.local)。
+
+因为使用了自建的 WordPress 服务，所以在登录客户端的时候，需要选择添加自托管的主机站点。点击 『Add Self-Hosted Site』
+
+``` console
+irb(main):002:0> touch("view marked:'Add Self-Hosted Site'")
+[
+    [0] {
+           "selected" => false,
+            "enabled" => true,
+               "rect" => {
+            "center_x" => 160,
+                   "y" => 479,
+               "width" => 290,
+                   "x" => 15,
+            "center_y" => 496,
+              "height" => 34
+        },
+                 "id" => nil,
+        "description" => "<WPNUXSecondaryButton: 0x7c293280; baseClass = UIButton; frame = (15 479; 290 34); opaque = NO; autoresize = LM+RM+TM; layer = <CALayer: 0x7c2934a0>>",
+              "label" => "Add Self-Hosted Site",
+              "alpha" => 1,
+              "class" => "WPNUXSecondaryButton",
+              "frame" => {
+                 "y" => 479,
+             "width" => 290,
+                 "x" => 15,
+            "height" => 34
+        }
+    }
+]
+```
+
+点击『Username / Email』 文本框
+
+``` console
+irb(main):003:0> touch("view marked:'Username / Email'")
+[
+    [0] {
+               "text" => "Username / Email",
+            "enabled" => true,
+               "rect" => {
+            "center_x" => 174,
+                   "y" => 197,
+               "width" => 272,
+                   "x" => 38,
+            "center_y" => 212,
+              "height" => 30
+        },
+                 "id" => nil,
+        "description" => "<UITextFieldLabel: 0x7a99cd10; frame = (38 7; 272 30); text = 'Username / Email'; opaque = NO; userInteractionEnabled = NO; layer = <_UILabelLayer: 0x7a9af0e0>>",
+              "label" => "Username / Email",
+              "alpha" => 1,
+              "class" => "UITextFieldLabel",
+              "frame" => {
+                 "y" => 7,
+             "width" => 272,
+                 "x" => 38,
+            "height" => 30
+        }
+    }
+]
+```
+
+输入用户名『odd-e』
+
+``` console
+irb(main):004:0> keyboard_enter_text "odd-e"
+nil
+```
+
+点击『Password』 文本框
+
+``` console
+irb(main):005:0> touch("view marked:'Password'")
+[
+    [0] {
+               "text" => "Password",
+            "enabled" => true,
+               "rect" => {
+            "center_x" => 154,
+                   "y" => 200,
+               "width" => 232,
+                   "x" => 38,
+            "center_y" => 215,
+              "height" => 30
+        },
+                 "id" => nil,
+        "description" => "<UITextFieldLabel: 0x7a9b4a30; frame = (38 7; 232 30); text = 'Password'; opaque = NO; userInteractionEnabled = NO; layer = <_UILabelLayer: 0x7a9b4af0>>",
+              "label" => "Password",
+              "alpha" => 1,
+              "class" => "UITextFieldLabel",
+              "frame" => {
+                 "y" => 7,
+             "width" => 232,
+                 "x" => 38,
+            "height" => 30
+        }
+    }
+]
+```
+
+输入密码『 s3cr3t』
+
+``` console
+irb(main):006:0> keyboard_enter_text "s3cr3t"
+nil
+```
+
+点击『Site Address (URL)』文本框
+
+``` console
+irb(main):007:0> touch("view marked:'Site Address (URL)'")
+[
+    [0] {
+               "text" => "Site Address (URL)",
+            "enabled" => true,
+               "rect" => {
+            "center_x" => 174,
+                   "y" => 244,
+               "width" => 272,
+                   "x" => 38,
+            "center_y" => 259,
+              "height" => 30
+        },
+                 "id" => nil,
+        "description" => "<UITextFieldLabel: 0x7a97e2f0; frame = (38 7; 272 30); text = 'Site Address (URL)'; opaque = NO; userInteractionEnabled = NO; layer = <_UILabelLayer: 0x7a9757b0>>",
+              "label" => "Site Address (URL)",
+              "alpha" => 1,
+              "class" => "UITextFieldLabel",
+              "frame" => {
+                 "y" => 7,
+             "width" => 272,
+                 "x" => 38,
+            "height" => 30
+        }
+    }
+]
+```
+
+输入主机地址『http://wordpress.local』
+
+``` console
+irb(main):008:0> keyboard_enter_text "http://wordpress.local"
+nil
+```
+
+点击『Add Site』按钮
+
+``` console
+irb(main):009:0> touch("view marked:'Add Site'")
+[
+    [0] {
+           "selected" => false,
+            "enabled" => true,
+               "rect" => {
+            "center_x" => 160,
+                   "y" => 296,
+               "width" => 290,
+                   "x" => 15,
+            "center_y" => 316.5,
+              "height" => 41
+        },
+                 "id" => nil,
+        "description" => "<WPNUXMainButton: 0x7a97d240; baseClass = UIButton; frame = (15 296; 290 41); opaque = NO; autoresize = LM+RM; layer = <CALayer: 0x7a9ae1d0>>",
+              "label" => "Add Site",
+              "alpha" => 1,
+              "class" => "WPNUXMainButton",
+              "frame" => {
+                 "y" => 296,
+             "width" => 290,
+                 "x" => 15,
+            "height" => 41
+        }
+    }
+]
+```
+
+到此为止就完成了自定义主机的登录过程，下面再回顾一下刚才输入的所有操作 **WordPress for iOS** 的命令。
+
+ * touch("view marked:'Add Self-Hosted Site'")
+ * touch("view marked:'Username / Email'")
+ * keyboard_enter_text "odd-e"
+ * touch("view marked:'Password'")
+ * keyboard_enter_text "s3cr3t"
+ * touch("view marked:'Site Address (URL)'")
+ * keyboard_enter_text "http://wordpress.local"
+ * touch("view marked:'Add Site'")
+ 
+这些命令的序列与我们直接手工操作应用是一致的，如果是手工操作，步骤依次为：
+
+ * 点击『Add Self-Hosted Site』
+ * 点击『Username / Email』
+ * 输入文本『odd-e』
+ * 点击『Password』
+ * 输入文本『s3cr3t』
+ * 点击『Site Address (URL)』
+ * 输入文本『http://wordpress.local』
+ * 点击『Add Site』
+
+下一步，就要考虑如何让上述的过程自动化的完成。
+
+### 让登录的过程自动化
+
+因为 WordPress for iOS 会保留登录信息，在登录成功后，再次打开应用会跳过登录界面。所以目前我们需要在每次运行登录的步骤之前，都需要先暂时手工注销当前的登录。
