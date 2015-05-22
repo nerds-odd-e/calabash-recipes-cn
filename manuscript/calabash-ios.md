@@ -103,10 +103,10 @@ Bringing machine 'default' up with 'virtualbox' provider...
 
 ### 获得 WordPress for iOS 源码
 
-WordPress for iOS 的源码位于 [https://github.com/wordpress-mobile/](https://github.com/wordpress-mobile/)
+WordPress for iOS 的源码位于 [https://github.com/nerds-odd-e/WordPress-iOS](https://github.com/nerds-odd-e/WordPress-iOS)
 
 ``` console
-$ git clone https://github.com/wordpress-mobile/WordPress-iOS.git
+$ git clone https://github.com/nerds-odd-e/WordPress-iOS.git
 Cloning into 'WordPress-iOS'...
 remote: Counting objects: 93355, done.
 remote: Compressing objects: 100% (52/52), done.
